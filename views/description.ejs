@@ -1,0 +1,35 @@
+<%- include("partials/header") %>
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead">YelpCamp</p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+    <div class="card p-1 text-center p-0 my-1" style="width:70%">
+        <img class="img-fluid card-img-top border-bottom-0" style="height:30rem" src="<%= campground.src %>" >
+        <div class="card-body p-2">
+            <div class = "caption-full">
+                <h5 class="card-title my-1"><%= campground.name%></h5>
+                <h6><%= campground.des%></h6>
+                <a href="/campgrounds" class="btn btn-danger btn-md float-right">Go Back</a>
+                <a href= <%="/campgrounds/" + campground._id + "/update" %> class = "btn btn-success btn-md" >Update</a>
+            </div>
+            <h4>comments</h4>
+            <% campground.comment.forEach(function(comment){ %>
+            <div>
+                <h6><strong><%=comment.author %></strong></h6>
+                <div>
+                    <%= comment.text %> 
+                </div>
+                <a href = <%="/campgrounds/" + campground._id + "/" +  comment._id +"/update" %> class = "btn btn-danger btn-sm m-2">update</a>
+            </div>
+            <% });%>
+            <a href= <%= "/campgrounds/" + campground._id + "/comment" %> class="btn btn-danger btn-md"> Add comment </a>
+        </div>
+        </div>
+</div>
+<%- include("partials/footer") %>

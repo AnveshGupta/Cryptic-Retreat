@@ -17,6 +17,9 @@
                 <h6><%= campground.des%></h6>
                 <a href="/campgrounds" class="btn btn-danger btn-md float-right">Go Back</a>
                 <a href= <%="/campgrounds/" + campground._id + "/update" %> class = "btn btn-success btn-md" >Update</a>
+                <form action= "/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
+                    <button class = "btn btn-danger btn-md">Delete</button>
+                </form>
             </div>
             <h4>comments</h4>
             <% campground.comment.forEach(function(comment){ %>
@@ -26,6 +29,9 @@
                     <%= comment.text %> 
                 </div>
                 <a href = <%="/campgrounds/" + campground._id + "/" +  comment._id +"/update" %> class = "btn btn-danger btn-sm m-2">update</a>
+                <form action= "/campgrounds/<%= campground._id + "/"+ comment._id %>?_method=DELETE" method="POST">
+                    <button class = "btn btn-danger btn-sm">Delete</button>
+                </form>
             </div>
             <% });%>
             <a href= <%= "/campgrounds/" + campground._id + "/comment" %> class="btn btn-danger btn-md"> Add comment </a>

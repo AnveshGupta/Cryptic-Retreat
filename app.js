@@ -58,7 +58,7 @@ app.get("/",function(req,res){
 
 app.use(AuthRoutes);
 app.use("/campgrounds",campgroundRoutes);
-app.use(commentRoutes);
+app.use("/campgrounds/:id",commentRoutes);
 
 app.listen(3000,function(req,res){
     console.log("server started");

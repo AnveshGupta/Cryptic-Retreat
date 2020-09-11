@@ -1,0 +1,92 @@
+<%- include("../partials/header") %>
+<div class="container d-flex justify-content-center">
+    <div class="row">
+        <div class="col-md-3">
+            <p class="lead text-light"><i class="fa fa-low-vision"></i> <b>Cryptic Retreats</b></p>
+            <div class="list-group">
+                <li class="list-group-item active">Info 1</li>
+                <li class="list-group-item">Info 2</li>
+                <li class="list-group-item">Info 3</li>
+            </div>
+        </div>
+    <div class="card p-1 text-center p-0 my-1" style="width:70%">
+        <div class = "slideshow-container text-left">  
+            <% loc.src.forEach(function(img){ %>
+                <div class="mySlides">
+                    <img class="img-fluid card-img-top border-bottom-0" style="width:60rem; height:35rem" src="<%= img %>" >
+                </div>
+            <% }); %>
+            <button class = "prev" onClick ="plusSlides(-1)">&#10094;</button>
+            <button class = "next" onClick ="plusSlides(1)">&#10095;</button>
+        </div>
+        <div class="card-body p-2">
+            <div id = "title" class= "p-3 text-left">
+                <h5 class="card-title my-1"><%= loc.name%></h5>
+                <h6>Region Located: <%= loc.region%></h6>
+                <h6>Coordinates: <%= loc.coordinate%></h6>
+                <h6><%= loc.des%></h6>
+                <div class="text-right">
+                    <% if(currentuser && loc.userid == currentuser._id) { %>
+                        <a href= <%="/location/" + loc._id + "/upload" %> class = "btn btn-success btn-sm pull-left" style="margin-right:5px" >Add Image</a>
+                        <!-- <a href= <%="/location/" + loc._id + "/deleteimage" %> class = "btn btn-danger btn-sm pull-left" >Delete Image</a> -->
+                        <form class="d-inline pull-left" action= <%="/location/" + loc._id + "/image/delete?_method=DELETE"%> method="POST">
+                            <input id="Delete_Image" name="index" class="d-none">
+                            <button class = "btn btn-danger btn-sm">Delete Image</button>
+                        </form>
+                        <a href= <%="/location/" + loc._id + "/update" %> class = "btn btn-success btn-sm" >Update</a>
+                        <form class="d-inline" action= "/location/<%= loc._id%>?_method=DELETE" method="POST">
+                            <button class = "btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    <% } %>
+                    <a href="/location" class="btn btn-primary btn-sm float">Go Back</a>
+                </div>
+            </div>
+            <div id = "chead" class="my-2 p-1"><h4><strong>Comments</strong></h4></div>
+            <% loc.comment.forEach(function(comment){ %>
+            <div id="cm" class="my-1 p-2 text-left">
+                <div class="my-2">
+                   <h6 class="d-inline"><strong><%=comment.author %></strong></h6> : <%= comment.text %>
+                </div> 
+                <% if(currentuser && comment.authorid == currentuser._id) { %>
+                    <div class="text-right">
+                        <a href = <%="/location/" + loc._id + "/" +  comment._id +"/update" %> class = "btn btn-primary btn-sm float">update</a>
+                        <form class="d-inline" action= "/location/<%= loc._id + "/"+ comment._id %>?_method=DELETE" method="POST">
+                            <button class = "btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+            <% });%>
+            <a href= <%= "/location/" + loc._id + "/comment" %> class="btn btn-danger btn-md"> Add comment </a>
+        </div>
+        </div>
+</div>
+
+<script>
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    // Next/previous controls
+    function plusSlides(n) {
+    showSlides(slideIndex += n);
+    }
+
+    // Thumbnail image controls
+    function currentSlide(n) {
+    showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    if (n > slides.length) {slideIndex = 1}
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex-1].style.display = "block";
+    var input = document.getElementById("Delete_Image");
+    input.value = slideIndex;
+    }
+</script>
+<%- include("../partials/footer") %>

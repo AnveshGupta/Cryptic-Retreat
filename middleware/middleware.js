@@ -1,8 +1,8 @@
-var comments = require("../models/comments");
-var campground = require("../models/campground");
-var user = require("../models/users");
-var ng = require("../models/campground");
-var comment = require("../models/comments");
+var comments = require("../models/comment");
+var campground = require("../models/location");
+var user = require("../models/user");
+var location = require("../models/location");
+var comment = require("../models/comment");
 var passport = require("passport");
 
 middleware = {};
@@ -25,13 +25,9 @@ middleware.check_Comment_Owner = function(req,res,next){
         comment.findById(req.params.comment_id,function(err,com){
             if(err){
                 req.flash("error","Comment cannot be changed");
-                res.redirect("/campgrounds/"+req.params.id);
+                res.redirect("/location/"+req.params.id);
             }
             else{
-                console.log(com.authorid);
-                console.log(req.user._id);
-                console.log(typeof(com.authorid));
-                console.log(typeof(req.user._id));
                 if(com.authorid == req.user._id){
                     next();
                 }
@@ -43,19 +39,19 @@ middleware.check_Comment_Owner = function(req,res,next){
         });
     }
 }
-middleware.check_Campground_Owner = function(req,res,next){
+middleware.check_Location_Owner = function(req,res,next){
     if(!req.isAuthenticated()){
         req.flash("error","You need to be logged in to do that");
         res.redirect("/login");
     }
     else{
-        ng.findById(req.params.id,function(err,camp){
+        location.findById(req.params.id,function(err,loc){
             if(err){
-                req.flash("error","Campground cannot be changed");
-                res.redirect("/campgrounds/"+req.params.id);
+                req.flash("error","Location cannot be changed");
+                res.redirect("/Location/"+req.params.id);
             }
             else{
-                if(camp.userid == req.user._id){
+                if(loc.userid == req.user._id){
                     next();
                 }
                 else {

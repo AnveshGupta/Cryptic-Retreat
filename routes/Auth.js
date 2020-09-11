@@ -1,14 +1,14 @@
 var express =  require("express");
 var router =  express.Router();
 var passport  = require("passport");
-var users = require("../models/users");
+var users = require("../models/user");
 
 router.get("/login",function(req,res){
     res.render("login");
 });
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/campgrounds",
+    successRedirect: "/location",
     failureRedirect: "/login"
 }) ,function(req, res){
 });
@@ -23,7 +23,8 @@ router.post("/signup",function(req,res){
             return res.redirect('/signup');
         }
         passport.authenticate("local")(req, res, function(){
-           res.redirect("/campgrounds");
+           req.flash("Success","Signed up");
+           res.redirect("/location");
         });
     });
 });

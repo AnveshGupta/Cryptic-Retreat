@@ -1,28 +1,13 @@
 <%- include("partials/header") %>
-
 <div class="container mt-3">
-        <header class="jumbotron">
-            <div class="container">
-                <h1 class="display-4">Welcome To YelpCamp!</h1>
-                <p>View our hand-picked campgrounds from all over the world</p>
-                <p>
-                <a class="btn btn-primary btn-md" href="/campgrounds/new">Add New Campground</a>
-                </p>
-            </div>
-        </header>
-        <div class="row">
-            <% campgrounds.forEach(function(component){ %>
-            <div class="col-sm-6 col-md-3 float-left ">     
-                    <div class="card p-1 text-center">
-                    <img class="img-fluid card-img-top border-bottom-0" style="height:15rem" src="<%=component.src%>" >
-                    <div class="card-body p-2">
-                        <h5 class="card-title my-1"><%= component.name%></h5>
-                        <a href="/campgrounds/<%=component._id%>" class="btn btn-success btn-sm">Find More</a>
-                    </div>
-                    </div>
-                </div>
-            <% }); %>
+    <header class="jumbotron">
+        <div class="container">
+            <h1 class="display-4">Welcome To Cryptic Retreats!</h1>
+            <p>Share the secret paradises with the world</p>
+            <p>
+            <a class="btn btn-primary btn-md" href="/location">Main Page</a>
+            </p>
         </div>
+    </header>
 </div>
-
 <%- include("partials/footer") %>

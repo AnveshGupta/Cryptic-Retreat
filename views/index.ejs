@@ -1,0 +1,28 @@
+<%- include("partials/header") %>
+
+<div class="container mt-3">
+        <header class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">Welcome To Cryptic Retreats!</h1>
+                <p>Share your secret paradises with the world</p>
+                <p>
+                <a class="btn btn-primary btn-md" href="/location/new">Add New Location</a>
+                </p>
+            </div>
+        </header>
+        <div class="row">
+            <% locations.forEach(function(component){ %>
+            <div class="col-sm-6 col-md-3 float-left ">     
+                    <div class="card p-1 text-center">
+                    <img class="img-fluid card-img-top border-bottom-0" style="height:15rem" src="<%=component.src[0]%>" >
+                    <div class="card-body p-2">
+                        <h5 class="card-title my-1"><%= component.name%></h5>
+                        <a href="/location/<%=component._id%>" class="btn btn-success btn-sm">Find More</a>
+                    </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+</div>
+
+<%- include("partials/footer") %>

@@ -28,10 +28,7 @@ app.use(mo("_method"));
 app.use(flash());
 db.set('useUnifiedTopology',true);
 db.set('useFindAndModify', false);
-db.connect("mongodb://localhost:27017/cryptic_retreats",{useNewUrlParser: true});
-
-// seeddb =  require("./seed");
-// seeddb();
+db.connect("mongodb+srv://newuser:newuser123@cluster0.1rsau.mongodb.net/<dbname>?retryWrites=true&w=majority",{useNewUrlParser: true});
 
 app.use(require("express-session")({
     secret: "this is @ $ecr3t which c@nn0t be cr@cked e@&1ly",
@@ -63,6 +60,6 @@ app.use(AuthRoutes);
 app.use("/location",locationRoutes);
 app.use("/location/:id",commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP,function(req,res){
+app.listen(process.env.PORT||3000, process.env.IP,function(req,res){
     console.log("server started");
 });

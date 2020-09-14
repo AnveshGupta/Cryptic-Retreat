@@ -62,7 +62,7 @@ app.get("/",function(req,res){
 app.use(AuthRoutes);
 app.use("/location",locationRoutes);
 app.use("/location/:id",commentRoutes);
-var a = 3000;
+
 app.listen(process.env.PORT, process.env.IP,function(req,res){
     console.log("server started");
 });

@@ -63,6 +63,6 @@ app.use(AuthRoutes);
 app.use("/location",locationRoutes);
 app.use("/location/:id",commentRoutes);
 
-app.listen(process.env.PORT, process.env.IP,function(req,res){
+app.listen(process.env.PORT||3000, process.env.IP,function(req,res){
     console.log("server started");
 });
